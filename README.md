@@ -1,7 +1,7 @@
 # Using Gmapping with Ouster LIDAR Sensor
 This software was used to enable gmapping with the Ouster LIDAR sensor
 
-To interface with the Ouster sensor using ROS see [here] (https://github.com/ouster-lidar/ouster_example/tree/master/ouster_ros)
+To interface with the Ouster sensor using ROS see [here](https://github.com/ouster-lidar/ouster_example/tree/master/ouster_ros)
 
 Launching the ouster sensor is done using:
 ```bash
