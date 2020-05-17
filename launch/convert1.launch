@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <!-- run pointcloud_to_laserscan node -->
+    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+
+        <remap from="cloud_in" to="/os1_cloud_node/points"/>
+        <remap from="scan" to="/scan_ouster"/>
+       	<rosparam>
+           <!--target_frame: ouster # Leave disabled to output scan in pointcloud frame-->
+            transform_tolerance: 0.01
+            min_height: 0.0
+            max_height: 5.0
+
+            angle_min: -3.14 # -M_PI
+            angle_max: 3.14 # M_PI
+            angle_increment: 0.0031 # M_PI/1024
+            <!--scan_time: 0.0-->
+            range_min: 1.0
+            range_max: 40.0
+            use_inf: false
+            inf_epsilon: 1.0
+
+            # Concurrency level, affects number of pointclouds queued for processing, thread number governed by nodelet manager
+            # 0 : Detect number of cores
+            # 1 : Single threaded
+            # 2->inf : Parallelism level
+            concurrency_level: 1
+        </rosparam>
+	<!--<param name ="/use_sim_time" value="true"/>-->
+
+    </node>
+	<!--Gmapping node
+	<node pkg="gmapping" type="slam_gmapping" name="gmapping">
+		<param name = "map_frame" value = "map"/>
+        <param name="base_frame" value="base_frame"/>
+        <param name="odom_frame" value="base_frame" />
+        <param name="delta" value="0.1" />
+    </node>-->
+	<node pkg="tf" type="static_transform_publisher" name="laser_base_link" args="0 0 0.1 0 0 0 /base_link /os1_sensor 100"
+  />
+
+</launch>
